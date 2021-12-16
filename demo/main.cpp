@@ -1,4 +1,4 @@
-#include "dgrender3d.h"
+#include "dgrender2d.h"
 
 #include <SFML/Window.hpp>
 #include <SFML/OpenGL.hpp>
@@ -19,17 +19,17 @@ int main()
     window.setVerticalSyncEnabled(true);
     window.setActive(true);
 
-    DgRender3D::initialize();
+    DgRender2D::initialize();
 
     sf::Shader shader;
     shader.loadFromFile("vertex_shader.glslv", "fragment_shader.glslf");
-    shader.setUniform("lightPosition", sf::Glsl::Vec3(0.0F, 5.0F, 0.0F));
+    shader.setUniform("lightPosition", sf::Glsl::Vec3(0.0F, 0.0F, 1.0F));
 
-    Mesh cube = Mesh::createCube();
+    Mesh plane = Mesh::createPlane();
 
     TransformNode sceneRoot;
-    MeshNode cubeNode(&cube, &shader);
-    sceneRoot.addNode(&cubeNode);
+    MeshNode planeNode(&plane, &shader);
+    sceneRoot.addNode(&planeNode);
 
     FreeCamera freeCam(glm::vec3(0.0F, 0.0F, 3.0F));
 
@@ -47,11 +47,7 @@ int main()
                 screenWidth = event.size.width;
                 screenHeight = event.size.height;
 
-                // TODO: Pack into resize function
                 glViewport(0, 0, screenWidth, screenHeight);
-                Camera::Perspective perspective;
-                perspective.aspectRatio = static_cast<float>(screenWidth) / static_cast<float>(screenHeight);
-                freeCam.setPerspective(perspective);
             }
             else if(event.type == sf::Event::KeyPressed)
             {
@@ -64,22 +60,10 @@ int main()
                     freeCam.move(glm::vec3(0.1F, 0.0F, 0.0F));
                     break;
                 case sf::Keyboard::W:
-                    freeCam.move(glm::vec3(0.0F, 0.0F, -0.1F));
-                    break;
-                case sf::Keyboard::S:
-                    freeCam.move(glm::vec3(0.0F, 0.0F, 0.1F));
-                    break;
-                case sf::Keyboard::R:
                     freeCam.move(glm::vec3(0.0F, 0.1F, 0.0F));
                     break;
-                case sf::Keyboard::F:
+                case sf::Keyboard::S:
                     freeCam.move(glm::vec3(0.0F, -0.1F, 0.0F));
-                    break;
-                case sf::Keyboard::Q:
-                    freeCam.rotate(0.05F);
-                    break;
-                case sf::Keyboard::E:
-                    freeCam.rotate(-0.05F);
                     break;
                 default:
                     break;

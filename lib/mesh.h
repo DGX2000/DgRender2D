@@ -13,6 +13,7 @@ public:
     struct Vertex
     {
         glm::vec3 position;
+        // TODO: Remove normal, add texture
         glm::vec3 normal;
     };
 
@@ -22,19 +23,7 @@ public:
 
     void draw(sf::Shader* shader);
 
-    static Mesh createCube();
-    static Mesh createCylinder(unsigned int segments);
-    static Mesh createSphere(unsigned int segments);
-
-private:
-    // Helper functions:
-    static std::vector<unsigned int> connectQuad(unsigned int start[4]);
-    static std::vector<unsigned int> connectRingToSingle(unsigned int ringStart,
-                                                         unsigned int ringLength,
-                                                         unsigned int center);
-    static std::vector<unsigned int> connectRingToRing(unsigned int upperRingStart,
-                                                       unsigned int lowerRingStart,
-                                                       unsigned int ringLength);
+    static Mesh createPlane();
 
 private:
     std::vector<Vertex> vertices;

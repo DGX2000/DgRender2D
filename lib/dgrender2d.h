@@ -10,10 +10,10 @@
 #include "camera.h"
 #include "freecamera.h"
 
-class DgRender3D
+class DgRender2D
 {
 public:
-    DgRender3D() = delete;
+    DgRender2D() = delete;
 
     static void initialize()
     {

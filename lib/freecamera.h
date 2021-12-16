@@ -15,7 +15,6 @@ public:
 
 private:
     glm::vec3 position;
-    float pan{0.0F};
 };
 
 #endif // FREECAMERA_H
