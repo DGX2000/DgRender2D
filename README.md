@@ -4,7 +4,7 @@ A 2D rendering library for personal use and learning purposes.
 
 ## Stuff to do
 
-- [ ] set up target for library and executable for demo
+- [X] set up target for library and executable for demo
 - [ ] scene graph for transforms (translate, rotate, scale, layers)
 - [ ] tile map
 - [ ] sprite
