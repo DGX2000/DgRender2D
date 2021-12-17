@@ -5,11 +5,11 @@ A 2D rendering library for personal use and learning purposes.
 ## Stuff to do
 
 - [X] set up target for library and executable for demo
-- [ ] scene graph for transforms (translate, rotate, scale, layers)
+- [X] scene graph for transforms (translate, rotate, scale, layers)
+- [X] camera
 - [ ] tile map
 - [ ] sprite
 - [ ] light
-- [ ] camera
 - [ ] shadows (tile maps)
 - [ ] day-night cycle with look-up tables for color mapping
 - [ ] normal mapping (generate normal map)
