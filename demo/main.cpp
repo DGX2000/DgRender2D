@@ -31,8 +31,9 @@ int main()
     MeshNode planeNode(&plane, &shader);
     sceneRoot.addNode(&planeNode);
 
-    FreeCamera freeCam(glm::vec3(0.0F, 0.0F, 3.0F));
+    FreeCamera freeCam(glm::vec2(0.0F, 0.0F));
 
+    float rotation = 0.0F;
     while(window.isOpen())
     {
         sf::Event event;
@@ -54,16 +55,16 @@ int main()
                 switch(event.key.code)
                 {
                 case sf::Keyboard::A:
-                    freeCam.move(glm::vec3(-0.1F, 0.0F, 0.0F));
+                    freeCam.move(glm::vec2(-0.1F, 0.0F));
                     break;
                 case sf::Keyboard::D:
-                    freeCam.move(glm::vec3(0.1F, 0.0F, 0.0F));
+                    freeCam.move(glm::vec2(0.1F, 0.0F));
                     break;
                 case sf::Keyboard::W:
-                    freeCam.move(glm::vec3(0.0F, 0.1F, 0.0F));
+                    freeCam.move(glm::vec2(0.0F, 0.1F));
                     break;
                 case sf::Keyboard::S:
-                    freeCam.move(glm::vec3(0.0F, -0.1F, 0.0F));
+                    freeCam.move(glm::vec2(0.0F, -0.1F));
                     break;
                 default:
                     break;
@@ -77,6 +78,8 @@ int main()
         glClear(GL_DEPTH_BUFFER_BIT);
 
         freeCam.capture(&sceneRoot);
+        sceneRoot.setRotation(rotation);
+        rotation += 0.01F;
 
         window.display();
     }

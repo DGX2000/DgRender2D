@@ -2,19 +2,19 @@
 
 #include <glm/gtc/matrix_transform.hpp>
 
-void TransformNode::move(const glm::vec3 &translation)
+void TransformNode::setPosition(const glm::vec2 &translation)
 {
-    this->translation += translation;
+    this->translation = translation;
     cachedTransformation.reset();
 }
 
-void TransformNode::rotate(const glm::vec3 &rotation)
+void TransformNode::setRotation(float rotation)
 {
-    this->rotation += rotation;
+    this->rotation = rotation;
     cachedTransformation.reset();
 }
 
-void TransformNode::scale(const glm::vec3 &scaling)
+void TransformNode::setScale(const glm::vec2 &scaling)
 {
     this->scaling = scaling;
     cachedTransformation.reset();
@@ -28,11 +28,9 @@ void TransformNode::transform(glm::mat4 &transformation) const
     {
         auto uncachedTransformation = glm::mat4(1.0F);
 
-        uncachedTransformation = glm::translate(uncachedTransformation, translation);
-        uncachedTransformation = glm::rotate(uncachedTransformation, rotation.x, glm::vec3(1.0, 0.0, 0.0));
-        uncachedTransformation = glm::rotate(uncachedTransformation, rotation.y, glm::vec3(0.0, 1.0, 0.0));
-        uncachedTransformation = glm::rotate(uncachedTransformation, rotation.z, glm::vec3(0.0, 0.0, 1.0));
-        uncachedTransformation = glm::scale(uncachedTransformation, scaling);
+        uncachedTransformation = glm::translate(uncachedTransformation, glm::vec3(translation, 0.0F));
+        uncachedTransformation = glm::rotate(uncachedTransformation, rotation, glm::vec3(0.0, 0.0, 1.0));
+        uncachedTransformation = glm::scale(uncachedTransformation, glm::vec3(scaling, 0.0F));
 
         cachedTransformation = uncachedTransformation;
     }
